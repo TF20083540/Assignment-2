@@ -2,7 +2,7 @@ class SpawnGen{
 //===========
 // Variables
 //===========  
-private int playerX1 = 960;
+private int playerX1 = 905;
 private int playerY1 = 1068;
 private int playerX2 = 110;
 private int playerY2 = 12;
@@ -51,10 +51,12 @@ void borders(){
 void keyPressed(){
   if(keyPressed == true){
     if(key == 'A' || key == 'a'){
-      playerX1--;
+      setplayerX(getplayerX()-3);
+      //playerX1--;
     }
     else if(key == 'D' || key == 'd'){
-      playerX1++;
+      setplayerX(getplayerX()+3);
+      //playerX1++;
     }
   }
 }
@@ -71,7 +73,7 @@ void spawnBall(){
 //=========
 
 public void setplayerX(int playerX1){
-  if(this.playerX1 >= getWall1() && this.playerX1 <= getWall2() - getplayerSize() ){
+  if(this.playerX1 >= getWall1() || this.playerX1 <= getWall2() - getplayerSize() ){
   this.playerX1 = playerX1;
   }
 }

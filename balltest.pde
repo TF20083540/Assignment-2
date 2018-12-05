@@ -16,9 +16,15 @@ class Balltest{
       this.ballX = ballX;
       println("Error 1: bt 12/15");
     }
+    else{
+      ballX = 960;
+    }
     if((ballY >= 300) && (ballY >= 600)){
       this.ballY = ballY;
       println("Error 2: bt 17/19");
+    }
+    else{
+      ballY = 300;
     }
   }
   
@@ -38,36 +44,35 @@ class Balltest{
   void ballMove(){
     ellipse(ballX,ballY,ballRad,ballRad);
     if(ballDirX == true){
-      setBallX(getBallX()+1);
+      setBallX(getBallX()+3);
     }
     else{
-      setBallX(getBallX()-1);
+      setBallX(getBallX()-3);
     }
     if(ballDirY == true){
-      setBallY(getBallY()+1);
+      setBallY(getBallY()+3);
     }
     else{
-      setBallY(getBallY()-1);
+      setBallY(getBallY()-3);
     }
   }
   
 void hitTest(){
   
-/*  int checkY = getBallY() - sg.getplayerY() + (getBallRad()/2);
-  int checkX = getBallX() - sg.getplayerX();
-  int checkX2= getBallX() - sg.getplayerX() + (sg.getplayerSize()/2); */
-  
-    if(getBallY() + (getBallRad()/2) == sg.getplayerY() && getBallX() >= sg.getplayerX() && getBallX() <= sg.getplayerX() + sg.getplayerSize()){
+    if(getBallY() + (getBallRad()/2) >= sg.getplayerY() && getBallX() >= sg.getplayerX() && getBallX() <= sg.getplayerX() + sg.getplayerSize()){
     ballDirY = !ballDirY;
+    pl.scoreCount();
     println("Error 3 PADDLE");
-  } else if(sg.getWall1() == getBallX() - (getBallRad() /2)|| sg.getWall2() == (getBallRad() /2) + getBallX()){ //Bug #1: left wall not detected properly
+  } else if(sg.getWall1() >= getBallX() - (getBallRad() /2)|| sg.getWall2() <= (getBallRad() /2) + getBallX()){ 
     ballDirX = !ballDirX;
+    pl.scoreCount();
     println("Error 4 WALL");
-  } else if(getBallY() - (getBallRad() /2) == 1){
+  } else if(getBallY() - (getBallRad() /2) <= 1){
     ballDirY = !ballDirY;
+    pl.scoreCount();
     println("Error 5 TOP");
-  } else if(getBallY() + ( getBallRad() /2) == height){ //Bug #2: bottom of the screen. Dafuq do I do the top?
-    ballDirY = !ballDirY;                              //Bug #3: Interferes with Paddle Collision.
+  } else if(getBallY() >= height){ //Bug #1: bottom of the screen. Dafuq do I do the top?
+    pl.lifeLost();
     println("Error 6 BOTTOM");
   }
   else{

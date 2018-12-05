@@ -10,3 +10,6 @@ Solution: With the top, it was similar to the left wall error. Required calculat
 Solution?:Move ball randomizer to the ball class..... or a long annoying process of transfering numbers and selecting from there.
 
 #4: Likely a syntax error. Unable to directly minus positioning through methods. Must figure out how to do this. Big requirement, both ball and paddle.
+Solution: use getter and operator and math within setter.
+
+#5: If connected right, the ball can enter the paddle from either side of the paddle, glide through it, and exit the other side. This causes a massive score increase. I'll do what most game developers do nowadays with bugs and just call it a feature.
