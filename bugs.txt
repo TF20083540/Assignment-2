@@ -1,0 +1,12 @@
+Bugs List
+#1: collision detection for left wall is within the wall. WHY?!?!
+2 days now and cant figure it out....
+Solution: Take into account ball motion. If it's hitting the left wall, it's going negative in position.... calculate the negative for the collision, not the positive!
+
+#2: height is not being detected up top at all, and its messing up the collision detection for the paddle. Unsure why.
+Solution: With the top, it was similar to the left wall error. Required calculating negative from the motion. Bottom, works fine now too. No paddle collision issues at all.
+
+#3: Unable to transfer boolean across classes without going through issues.
+Solution?:Move ball randomizer to the ball class..... or a long annoying process of transfering numbers and selecting from there.
+
+#4: Likely a syntax error. Unable to directly minus positioning through methods. Must figure out how to do this. Big requirement, both ball and paddle.

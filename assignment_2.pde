@@ -3,8 +3,9 @@ Balltest bt = new Balltest();
 
 void setup(){
   fullScreen();
-//size(1920,1080);
   noStroke();
+  frameRate(144);
+  sg.spawnBall();
 }
 
 void draw(){
@@ -12,14 +13,14 @@ void draw(){
   sg.display();
   bt.display();
   debugMe();
+  
 }
 
-void debugMe(){                //A purely debuging method. Prints lots of data to the right side of the board.
-  int paddlePosition = sg.pPadX1 + 55;
+void debugMe(){                //A purely debugging method. Prints lots of data to the right side of the board.
+
   fill(0);
   rect(1490, 20, 400, 300);
   fill(255);
   textSize(24);
-  text("Debug Data\nPlayer Position: " +paddlePosition+ " (center)\nBall X: Currently Unused\nBall Y: Currently Unused\nControls:\nA = Move Left, D = Move Right", 1500,50);
+  text("Debug Data\nPlayer Position\nX: " +sg.getplayerX()+ "\nY:"+sg.getplayerY()+"\nBallX:"+bt.getBallX()+"\nBallY:"+bt.getBallY(), 1500,50);
 }
-  
