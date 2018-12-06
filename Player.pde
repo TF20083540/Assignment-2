@@ -1,9 +1,11 @@
 class Player{
-
-int scoreTable = 0;
-int hScores[] = new int[11];
-int score;
-int lives;
+//=========
+//Variables
+//=========
+  private int playerX1 = 905;
+  private int playerY1 = 1068;
+  private int playerX2 = 110;
+  private int playerY2 = 12;
 
 //============
 //Constructors
@@ -11,96 +13,72 @@ int lives;
 
   Player(){
   }
-  
-  Player(int score){
-    this.score = score;
-}
 
-  
-//=======
-//Methods
-//=======
-
-void display(){
-  text("Lives: "+lives, 300,300); //debug code
-  text("Score: "+score, 300,200);
-  scoreBoard();
-}
-
-void livesCheck(){
-  lives=Integer.parseInt(JOptionPane.showInputDialog("Enter a difficulty between 0 and 3.", "3"));
-}
-
-void scoreCount(){
-  setScore(getScore() +1);
-}
-
-void scoreAdd(){
-  if(scoreTable < 10){
-    scoreTable += 1;
-    hScores[scoreTable] = score;
-    println(hScores[scoreTable]);
-  }
-  else{
-    for(int i = 0; i < scoreTable; i++){
-      if(hScores[i] < score){
-       hScores[i] = score; 
-       break;
-      }
+  Player(int playerX1){
+    if(this.playerX1 > sg.getWall1() && this.playerX1 < sg.getWall2() - getplayerSize() ){
+    this.playerX1 = playerX1;
+    }
     else{
     }
+  }
+
+//=======
+//Methods 
+//=======
+
+  public void display(){
+    pPaddle();
+  }
+
+  private void pPaddle(){
+    keyPressed();
+    fill(255,165,0);
+    rect(playerX1,playerY1,playerX2,playerY2);
+  }
+
+  private void keyPressed(){
+    if(keyPressed == true){
+      if(key == 'A' || key == 'a'){
+        if(getplayerX() > sg.getWall1()){
+          setplayerX(getplayerX()-3);
+        }
+      }
+      else if(key == 'D' || key == 'd'){
+        if(getplayerX() + getplayerSize() < sg.getWall2()){
+          setplayerX(getplayerX()+3);
+      }
+      }
     }
   }
-}
 
-void lifeLost(){
-  if(lives > 0){
-  JOptionPane.showMessageDialog(null, "You lost a life!");
-  lives--;
-  sg.setplayerX(905);
-  sg.spawnBall();
-  } else if(lives == 0){
-      JOptionPane.showMessageDialog(null, "Game Over!");
-      scoreAdd();
-      int reply = JOptionPane.showConfirmDialog(null, "Would you like to play another game?", "Play Again?", JOptionPane.YES_NO_OPTION);
-      if(reply == 0){
-        livesCheck();
-        score = 0;
-        sg.setplayerX(905);
-        sg.spawnBall();
-    
-      }
-      else{
-        JOptionPane.showMessageDialog(null, "Thank you for playig! \n Now closing game!");   
-        System.exit(0);
-      }
+//=======
+//Setters
+//=======
+
+  public void setplayerX(int playerX1){
+    if(this.playerX1 >= sg.getWall1() || this.playerX1 <= sg.getWall2() - getplayerSize() ){
+      this.playerX1 = playerX1;
     }
-}
-
-void scoreBoard(){
-  textSize(24);
-  text("HIGHSCORES",100,400);
-  for(int i = 1; i <= scoreTable; i++){
-    text(hScores[i],100,400+(i*25));
   }
-}
 
 //=======
-//setters
+//Getters
 //=======
 
-private void setScore(int score){
-  this.score = score;
-}
+  public int getplayerX(){
+    return playerX1;
+  }
 
+  public int getplayerY(){
+    return playerY1;
+  }
 
-//=======
-//getters
-//=======
+  public int getplayerSize(){
+    return playerX2;
+  }
 
-private int getScore(){
-  return score;
-}
-
+  public int getplayerHeight(){
+    return playerY2;
+  }
 
 }

@@ -1,4 +1,7 @@
-class Balltest{
+class Ball{
+//=========
+//Variables
+//=========
   private int ballX;
   private int ballY;
   private int ballRad = 50;
@@ -8,27 +11,25 @@ class Balltest{
 //============
 //Constructors
 //============
-  Balltest(){
+  Ball(){
   }
   
-  Balltest(int ballX, int ballY){
+  Ball(int ballX, int ballY){
     if((ballX >= sg.getWall1()) && (ballX <= sg.getWall2())){
       this.ballX = ballX;
-      println("Error 1: bt 12/15");
     }
     else{
       ballX = 960;
     }
     if((ballY >= 300) && (ballY >= 600)){
       this.ballY = ballY;
-      println("Error 2: bt 17/19");
     }
     else{
       ballY = 300;
     }
   }
   
-  Balltest(boolean ballDirX){
+  Ball(boolean ballDirX){
     this.ballDirX = ballDirX;
   }
   
@@ -36,12 +37,13 @@ class Balltest{
 //Methods
 //=======
 
-  void display(){
+  public void display(){
    ballMove();
-   hitTest();
+   cDetect();
   }
   
-  void ballMove(){
+  private void ballMove(){
+    fill(255,165,0);
     ellipse(ballX,ballY,ballRad,ballRad);
     if(ballDirX == true){
       setBallX(getBallX()+3);
@@ -57,22 +59,22 @@ class Balltest{
     }
   }
   
-void hitTest(){
+private void cDetect(){
   
-    if(getBallY() + (getBallRad()/2) >= sg.getplayerY() && getBallX() >= sg.getplayerX() && getBallX() <= sg.getplayerX() + sg.getplayerSize()){
+    if(getBallY() + (getBallRad()/2) >= pl.getplayerY() && getBallX() >= pl.getplayerX() && getBallX() <= pl.getplayerX() + pl.getplayerSize()){
     ballDirY = !ballDirY;
-    pl.scoreCount();
+    sc.scoreCount();
     println("Error 3 PADDLE");
   } else if(sg.getWall1() >= getBallX() - (getBallRad() /2)|| sg.getWall2() <= (getBallRad() /2) + getBallX()){ 
     ballDirX = !ballDirX;
-    pl.scoreCount();
+    sc.scoreCount();
     println("Error 4 WALL");
   } else if(getBallY() - (getBallRad() /2) <= 1){
     ballDirY = !ballDirY;
-    pl.scoreCount();
+    sc.scoreCount();
     println("Error 5 TOP");
-  } else if(getBallY() >= height){ //Bug #1: bottom of the screen. Dafuq do I do the top?
-    pl.lifeLost();
+  } else if(getBallY() >= height){ //Bug #1: bottom of the screen works. Dafuq do I do the top?
+    sc.lifeLost();
     println("Error 6 BOTTOM");
   }
   else{
